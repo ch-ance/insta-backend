@@ -31,7 +31,9 @@ authRouter.post("/login", (req, res) => {
     .then(user => {
       if (user && bcrypt.compareSync(creds.password, user.password)) {
         // res.status(201).json({ token: getToken(user) });
-        res.status(201).json({ token: getToken(user) });
+        res
+          .status(201)
+          .json({ username: creds.username, token: getToken(user) });
       } else {
         res.status(401).json({ message: "Login failed" });
       }
